@@ -57,7 +57,7 @@ public class GameOfLife {
                 Cell new_cell = makeCell(in, input_type);
 
                 //if we don't already have this cell
-                if (World.containsCell(new_cell) != -1){
+                if (World.containsCell(new_cell, World.Cells) != -1){
                     System.out.println("Live cell created");
                     //add to alive cells
                     World.Cells.add(new_cell);
@@ -198,7 +198,7 @@ public class GameOfLife {
 
     /**
      * Takes a string and constructs a Cell object
-     * @param in
+     * @param in the input entered by the user
      * @return a new Cell object
      */
     private static Cell makeCell(String in, int index){

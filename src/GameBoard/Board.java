@@ -20,7 +20,8 @@ public class Board {
     public void toDisplay(int tick){
 
         System.out.println("\nAT TICK NUMBER " + Integer.toString(tick) + ":\n\n");
-        //Print every Cell in quadrant 1
+        //Print every Cell
+        
 
 
     }
@@ -63,14 +64,11 @@ public class Board {
         }
 
         //iterate through the removeList and all the alive cells, removing all the matches
-        for(Cell remove_kebab : removeList)
-            for (Cell curr : this.Cells) {
-                //if cells are equal
-                if (remove_kebab.sameCell(curr)) {
-                    int curr_index = this.Cells.indexOf(curr);
-                    this.Cells.remove(curr_index);
-                }
-            }
+        for(Cell remove_kebab : removeList) {
+            int index_to_remove = containsCell(remove_kebab,this.Cells);
+            removeCell(index_to_remove,this.Cells);
+        }
+
     }
 
     /**
@@ -104,6 +102,7 @@ public class Board {
                     if (curr.sameCell(last) || other.sameCell(last)){
                         continue;
                     }
+
                     //get this live cell's neighbors
                     ArrayList<Cell> nbors3 = last.getNeighbors();
 
@@ -114,46 +113,29 @@ public class Board {
                     for (Cell nbor1 : nbors1){
 
                         //make sure it is dead
-                        for (Cell cont : this.Cells) {
-                            if (nbor1.sameCell(cont)) {
-                                continue;
-                            }
+                        if (containsCell(nbor1,this.Cells) == -1){
+                            continue;
                         }
 
                         //for every neighbor in the second cell's neighbors
                         for (Cell nbor2 : nbors2){
 
                             //make sure it is dead
-                            for (Cell cont : this.Cells) {
-                                if (nbor2.sameCell(cont)) {
-                                    continue;
-                                }
+                            if (containsCell(nbor2,this.Cells) == -1){
+                                continue;
                             }
 
                             //for every neighbor in the third cell's neighbors
                             for (Cell nbor3 : nbors3){
 
                                 //make sure it is dead
-                                for (Cell cont : this.Cells) {
-                                    if (nbor3.sameCell(cont)) {
-                                        continue;
-                                    }
+                                if (containsCell(nbor3,this.Cells) == -1){
+                                    continue;
                                 }
 
                                 //if all of these neighbors is the same dead cell
                                 if (nbor1.sameCell(nbor2) && nbor2.sameCell(nbor3)){
-                                    //assume it is not already added to lazarus
-                                    boolean add = true;
-                                    //make sure it is not already added to lazarus
-                                    for (Cell to_add : lazarus){
-                                        //if our dead neighbor already is in our list
-                                        if (to_add.sameCell(nbor1)){
-                                            add = false;
-                                            break;
-                                        }
-                                    }
-                                    //if it isn't already in lazarus
-                                    if (add){
+                                    if (containsCell(nbor1,lazarus) != -1){
                                         lazarus.add(nbor1);
                                     }
                                 }
@@ -171,9 +153,9 @@ public class Board {
      * @param query the cell we're seeing if is already alive
      * @return yes or no to whether it exists
      */
-    public int containsCell(Cell query){
-        for (int i = 0; i < this.Cells.size(); i++){
-            if (this.Cells.get(i).sameCell(query)){
+    public int containsCell(Cell query, ArrayList<Cell> liveCells){
+        for (int i = 0; i < liveCells.size(); i++){
+            if (liveCells.get(i).sameCell(query)){
                 return i;
             }
         }
