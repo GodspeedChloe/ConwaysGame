@@ -13,6 +13,7 @@ import java.io.InputStreamReader;
  */
 public class GameOfLife {
 
+
     /**
      * This is the main function for the program.  It communicates with the user
      * and handles the inputs, valid or invalid.  It also stores the information and
@@ -23,15 +24,14 @@ public class GameOfLife {
     public static void main(String[] args) throws IOException{
 
         //Let user know what inputs are valid
-        System.out.println("Enter three numbers separated by commas");
-        System.out.println("The first digit is the quadrant {1,2,3,4};");
-        System.out.println("the second digit is the x coordinate;");
-        System.out.println("the third digit is the y coordinate");
-        System.out.println("     Example: 1,2,3");
+        System.out.println("Enter two numbers separated by commas");
+        System.out.println("the first digit is the x coordinate;");
+        System.out.println("the second digit is the y coordinate");
+        System.out.println("     Example: 4,2");
         System.out.println("Enter the word START to begin the game");
 
         //create the world
-        Board myBoard = new Board();
+        Board World = new Board();
 
         //Take from stream
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -45,12 +45,12 @@ public class GameOfLife {
 
             String in = br.readLine();
 
-            //0 -> user wants to make a cell
-            //1 -> user wants to start the simulation
-            //2 -> user entered invalid inputs
+            //positive int -> user wants to make a cell
+            //0 -> user wants to start the simulation
+            //-1 -> user entered invalid inputs
             int input_type = parseInput(in);
 
-            if (input_type == 0){
+            if (input_type > 0){
 
                 //create a new cell
                 Cell new_cell = makeCell(in);
@@ -64,7 +64,7 @@ public class GameOfLife {
                     boolean add = true;
 
                     //iterate through existing live cells
-                    for (Cell curr : myBoard.Cells){
+                    for (Cell curr : World.Cells){
                         //if our cell to add is equal to an existing cell
                         if (curr.sameCell(new_cell)) {
                             add = false;
@@ -75,21 +75,12 @@ public class GameOfLife {
                     if (add) {
                         System.out.println("Live cell created");
                         //add to alive cells
-                        myBoard.Cells.add(new_cell);
-                        //add to relevant quadrant
-                        if (new_cell.quadrant == 1) {
-                            myBoard.Quadrant1.add(new_cell);
-                        } else if (new_cell.quadrant == 2) {
-                            myBoard.Quadrant2.add(new_cell);
-                        } else if (new_cell.quadrant == 3) {
-                            myBoard.Quadrant3.add(new_cell);
-                        } else {
-                            myBoard.Quadrant4.add(new_cell);}
+                        World.Cells.add(new_cell);
                     }
                 }
             }
             //if user entered START input
-            else if (input_type == 1){
+            else if (input_type == 0){
                 System.out.println("Enter a positive integer for how many iterations you want to run");
                 String inp = br.readLine();
                 //if our user entered a valid integer
@@ -109,7 +100,7 @@ public class GameOfLife {
                 }
             }
             //if user entered anything that is invalid
-            else if (input_type == 2){
+            else if (input_type == -1){
                 System.out.println("Invalid input, try again pl0x");
             }
         }
@@ -124,9 +115,9 @@ public class GameOfLife {
             //for every tick the user wants to do
             for (int i = 0; i < runs; i++) {
                 //apply rules 1-4 to the entire game
-                myBoard.playBall();
+                World.playBall();
                 //print out what's on our board by quadrants 1-4
-                myBoard.toDisplay(i+1);
+                World.toDisplay(i + 1);
             }
 
             //Are we still playing?
@@ -171,42 +162,38 @@ public class GameOfLife {
     /**
      * This program takes our user input and returns what type of input it is
      * @param in is our input from buffered reader
-     * @return 0 to create a cell
-     * @return 1 to start the game
-     * @return 2 to tell user input was garbage
+     * @return 0 to start the game
+     * -1 to tell user input was garbage
+     *  i to save where input splits coordinates
      */
     public static int parseInput(String in){
 
-        int num_count = 0;
         if (in.equals("START")){
-            return 1;
+            return 0;
         }
         for (int i = 0; i < in.length(); i++) {
-            if (Character.isDigit(in.charAt(i))){
+            if (Character.isDigit(in.charAt(i)) || in.charAt(i) == '-'){
                 continue;
             }
             else if (in.charAt(i) == ','){
-                num_count ++;
-                continue;
-            }
-            else if (in.charAt(i) == '-'){
-                System.out.println("Positive inputs only pl0x");
-                return 2;
+                if (isInteger(in.substring(0,i-1))){
+                    if (isInteger(in.substring(i+1,in.length()-1))){
+                        return 0;
+                    }
+                }
             }
             else{
-                return 2;
+                return -1;
             }
         }
-        if (num_count == 2){
-            return 0;
-        }
-        return 2;
+
+        return -1;
     }
 
     /**
      * Takes a string and tells whether or not it is an integer
      * @param s is string
-     * @return
+     * @return whether or not a string can be passed into 'parseInt()'
      */
     public static boolean isInteger(String s) {
         try {
@@ -227,13 +214,7 @@ public class GameOfLife {
      */
     private static Cell makeCell(String in) {
         Cell new_cell = new Cell();
-        int quad = Integer.parseInt(in.substring(0, 1));
-        if ( quad > 0 && quad < 5){
-            new_cell.quadrant = quad;
-        }
-        else{
-            return null;
-        }
+
         new_cell.x = Math.abs(Integer.parseInt(in.substring(2,3)));
         new_cell.y = Math.abs(Integer.parseInt(in.substring(4, 5)));
         return new_cell;

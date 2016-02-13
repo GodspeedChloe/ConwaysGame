@@ -1,9 +1,7 @@
 package GameBoard;
 
-import com.sun.prism.impl.ps.CachingEllipseRep;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 /**
  * Created by Chloe on 1/28/2016.
@@ -11,13 +9,8 @@ import java.util.ArrayList;
  */
 public class Board {
 
-    //ArrayLists for all the alive cells
+    //HashSet for all the alive cells
     public ArrayList<Cell> Cells = new ArrayList<>();
-    //Cells are stored in the Cells list and also their quadrant's list
-    public ArrayList<Cell> Quadrant1 = new ArrayList<>();
-    public ArrayList<Cell> Quadrant2 = new ArrayList<>();
-    public ArrayList<Cell> Quadrant3 = new ArrayList<>();
-    public ArrayList<Cell> Quadrant4 = new ArrayList<>();
 
 
     /**
@@ -28,25 +21,8 @@ public class Board {
 
         System.out.println("\nAT TICK NUMBER " + Integer.toString(tick) + ":\n\n");
         //Print every Cell in quadrant 1
-        System.out.println("IN QUADRANT 1:\n");
-        for (Cell q1 : this.Quadrant1){
-            System.out.println(q1.toString());
-        }
-        //Print every Cell in quadrant 2
-        System.out.println("IN QUADRANT 2:\n");
-        for (Cell q2 : this.Quadrant2){
-            System.out.println(q2.toString());
-        }
-        //Print every Cell in quadrant 3
-        System.out.println("IN QUADRANT 3:");
-        for (Cell q3 : this.Quadrant1){
-            System.out.println(q3.toString());
-        }
-        //Print every Cell in quadrant 4
-        System.out.println("IN QUADRANT 4:");
-        for (Cell q4 : this.Quadrant1){
-            System.out.println(q4.toString());
-        }
+
+
     }
 
     /**
@@ -188,6 +164,27 @@ public class Board {
             }
         }
         return lazarus;
+    }
+
+    /**
+     * Method for seeing if a cell is already alive
+     * @param query the cell we're seeing if is already alive
+     * @return yes or no to whether it exists
+     */
+    public int containsCell(Cell query, ArrayList<Cell> liveCells){
+        for (int i = 0; i < liveCells.size(); i++){
+            if (liveCells.get(i).sameCell(query)){
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    /**
+     * Method for removing a cell as if by death
+     */
+    public void removeCell(int index_to_remove, ArrayList<Cell> liveCells){
+        liveCells.remove(index_to_remove);
     }
 }
 
