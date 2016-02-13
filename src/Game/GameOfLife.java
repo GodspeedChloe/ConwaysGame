@@ -18,7 +18,7 @@ public class GameOfLife {
      * This is the main function for the program.  It communicates with the user
      * and handles the inputs, valid or invalid.  It also stores the information and
      * runs the Game.
-     * @param args
+     * @param args default arguments
      * @throws IOException
      */
     public static void main(String[] args) throws IOException{
@@ -50,35 +50,23 @@ public class GameOfLife {
             //-1 -> user entered invalid inputs
             int input_type = parseInput(in);
 
+            //if user entered two comma separated integers
             if (input_type > 0){
 
                 //create a new cell
-                Cell new_cell = makeCell(in);
+                Cell new_cell = makeCell(in, input_type);
 
-                //if user input has invalid quadrant
-                if (new_cell == null){
-                    System.out.println("Wrong quadrant field entered, try again pl0x");
+                //if we don't already have this cell
+                if (World.containsCell(new_cell) != -1){
+                    System.out.println("Live cell created");
+                    //add to alive cells
+                    World.Cells.add(new_cell);
                 }
-                else {
-
-                    boolean add = true;
-
-                    //iterate through existing live cells
-                    for (Cell curr : World.Cells){
-                        //if our cell to add is equal to an existing cell
-                        if (curr.sameCell(new_cell)) {
-                            add = false;
-                            System.out.println("Cell already exists");
-                        }
-                    }
-                    //if the cell to add is original and not already entered
-                    if (add) {
-                        System.out.println("Live cell created");
-                        //add to alive cells
-                        World.Cells.add(new_cell);
-                    }
+                else{
+                    System.out.println("Cell already exists");
                 }
             }
+
             //if user entered START input
             else if (input_type == 0){
                 System.out.println("Enter a positive integer for how many iterations you want to run");
@@ -99,6 +87,7 @@ public class GameOfLife {
                     System.out.println("Please try again, not a valid positive integer");
                 }
             }
+
             //if user entered anything that is invalid
             else if (input_type == -1){
                 System.out.println("Invalid input, try again pl0x");
@@ -212,11 +201,10 @@ public class GameOfLife {
      * @param in
      * @return a new Cell object
      */
-    private static Cell makeCell(String in) {
+    private static Cell makeCell(String in, int index){
         Cell new_cell = new Cell();
-
-        new_cell.x = Math.abs(Integer.parseInt(in.substring(2,3)));
-        new_cell.y = Math.abs(Integer.parseInt(in.substring(4, 5)));
+        new_cell.x = Math.abs(Integer.parseInt(in.substring(0,index-1)));
+        new_cell.y = Math.abs(Integer.parseInt(in.substring(index+1, in.length()-1)));
         return new_cell;
     }
 }

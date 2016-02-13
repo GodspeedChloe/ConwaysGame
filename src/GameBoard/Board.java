@@ -171,9 +171,9 @@ public class Board {
      * @param query the cell we're seeing if is already alive
      * @return yes or no to whether it exists
      */
-    public int containsCell(Cell query, ArrayList<Cell> liveCells){
-        for (int i = 0; i < liveCells.size(); i++){
-            if (liveCells.get(i).sameCell(query)){
+    public int containsCell(Cell query){
+        for (int i = 0; i < this.Cells.size(); i++){
+            if (this.Cells.get(i).sameCell(query)){
                 return i;
             }
         }
