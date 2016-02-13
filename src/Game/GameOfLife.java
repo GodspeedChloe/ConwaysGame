@@ -57,7 +57,7 @@ public class GameOfLife {
                 Cell new_cell = makeCell(in, input_type);
 
                 //if we don't already have this cell
-                if (World.containsCell(new_cell, World.Cells) != -1){
+                if (World.containsCell(new_cell, World.Cells) == -1){
                     System.out.println("Live cell created");
                     //add to alive cells
                     World.Cells.add(new_cell);
@@ -165,11 +165,14 @@ public class GameOfLife {
                 continue;
             }
             else if (in.charAt(i) == ','){
-                if (isInteger(in.substring(0,i-1))){
-                    if (isInteger(in.substring(i+1,in.length()-1))){
-                        return 0;
+                if (isInteger(in.substring(0,i))){
+                    if (isInteger(in.substring(i+1,in.length()))){
+                        return i;
                     }
                 }
+            }
+            else if (isInteger(in.substring(i,i+1))){
+                continue;
             }
             else{
                 return -1;
@@ -203,8 +206,8 @@ public class GameOfLife {
      */
     private static Cell makeCell(String in, int index){
         Cell new_cell = new Cell();
-        new_cell.x = Math.abs(Integer.parseInt(in.substring(0,index-1)));
-        new_cell.y = Math.abs(Integer.parseInt(in.substring(index+1, in.length()-1)));
+        new_cell.x = Integer.parseInt(in.substring(0,index));
+        new_cell.y = Integer.parseInt(in.substring(index+1, in.length()));
         return new_cell;
     }
 }

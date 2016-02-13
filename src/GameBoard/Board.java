@@ -1,5 +1,6 @@
 package GameBoard;
 
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 import java.util.ArrayList;
 import java.util.HashSet;
 
@@ -9,8 +10,12 @@ import java.util.HashSet;
  */
 public class Board {
 
-    //HashSet for all the alive cells
-    public ArrayList<Cell> Cells = new ArrayList<>();
+    //ArrayList for all the alive cells
+    public ArrayList<Cell> Cells;
+
+    public Board() {
+        Cells = new ArrayList<>();
+    }
 
 
     /**
@@ -19,11 +24,11 @@ public class Board {
      */
     public void toDisplay(int tick){
 
-        System.out.println("\nAT TICK NUMBER " + Integer.toString(tick) + ":\n\n");
+        System.out.println("\nAT TICK NUMBER " + Integer.toString(tick) + ":\n");
         //Print every Cell
-        
-
-
+        for(Cell alive : this.Cells) {
+            System.out.println(alive.toString());
+        }
     }
 
     /**
