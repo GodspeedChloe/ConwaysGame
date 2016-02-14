@@ -10,10 +10,14 @@ import java.util.ArrayList;
 public class Cell {
 
     //horizontal absolute cartesian position
-    public int x = 0;
+    private int x;
     //vertical absolute cartesian position
-    public int y = 0;
+    private int y;
 
+    public Cell(){
+        setX(x);
+        setY(y);
+    }
 
     /**
      * This method fetches all neighboring cells of an alive cell, either dead of alive
@@ -31,43 +35,44 @@ public class Cell {
             Cell neighbor = new Cell();
             //if above the cell
             if (side == 1){
-                neighbor.x = this.x;
-                neighbor.y = this.y + 1;
+                neighbor.setX(getX());
+                neighbor.setY(getY()+1);
             }
             //if diagonally up + right of the cell
             else if (side == 2){
-                neighbor.x = this.x + 1;
-                neighbor.y = this.y + 1;
+                neighbor.setX(getX()+1);
+                neighbor.setY(getY()+1);
             }
+
             //if adjacently right to the cell
             else if (side == 3){
-                neighbor.x = this.x + 1;
-                neighbor.y = this.y;
+                neighbor.setX(getX()+1);
+                neighbor.setY(getY());
             }
             //if diagonally down + right of the cell
             else if (side == 4){
-                neighbor.x = this.x + 1;
-                neighbor.y = this.y - 1;
+                neighbor.setX(getX()+1);
+                neighbor.setY(getY()-1);
             }
             //if below the cell
             else if (side == 5){
-                neighbor.x = this.x;
-                neighbor.y = this.y - 1;
+                neighbor.setX(getX());
+                neighbor.setY(getY()-1);
             }
             //if diagonally down + left of the cell
             else if (side == 6){
-                neighbor.x = this.x - 1;
-                neighbor.y = this.y - 1;
+                neighbor.setX(getX()-1);
+                neighbor.setY(getY()-1);
             }
             //if adjacently left to the cell
             else if (side == 7){
-                neighbor.x = this.x - 1;
-                neighbor.y = this.y;
+                neighbor.setX(getX()-1);
+                neighbor.setY(getY());
             }
             //if diagonally up + left of the cell
             else if (side == 8){
-                neighbor.x = this.x - 1;
-                neighbor.y = this.y + 1;
+                neighbor.setX(getX()-1);
+                neighbor.setY(getY()+1);
             }
             neighbors.add(neighbor);
         }
@@ -82,24 +87,39 @@ public class Cell {
     public int neighborCount(ArrayList<Cell> liveCells){
         int nbor_count = 0;
         for (Cell curr_cell : liveCells) {
-            ArrayList<Cell> nbors = this.getNeighbors();
+            ArrayList<Cell> nbors = getNeighbors();
             for (Cell curr_nbor : nbors) {
-                Cell other = curr_cell;
-                if (other.x == curr_nbor.x && other.y == curr_nbor.y){nbor_count ++;}
+                if (curr_cell.getX() == curr_nbor.getX() && curr_cell.getY() == curr_nbor.getY()){nbor_count ++;}
             }
         }
         return nbor_count;
     }
 
     public boolean sameCell(Cell comp){
-        if (this.x == comp.x && this.y == comp.y){
+        if (getX() == comp.getX() && getY() == comp.getY()){
             return true;
         }
         return false;
     }
 
+    public int getX() {
+        return x;
+    }
+
+    public int getY(){
+        return y;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
     @Override
     public String toString(){
-        return("X-COORDINATE: " + Integer.toString(this.x) + "        Y-COORDINATE: " + Integer.toString(this.y));
+        return("X-COORDINATE: " + Integer.toString(getX()) + "        Y-COORDINATE: " + Integer.toString(getY()));
     }
 }

@@ -57,10 +57,10 @@ public class GameOfLife {
                 Cell new_cell = makeCell(in, input_type);
 
                 //if we don't already have this cell
-                if (World.containsCell(new_cell, World.Cells) == -1){
+                if (World.containsCell(new_cell, World.getCells()) == -1){
                     System.out.println("Live cell created");
                     //add to alive cells
-                    World.Cells.add(new_cell);
+                    World.getCells().add(new_cell);
                 }
                 else{
                     System.out.println("Cell already exists");
@@ -102,10 +102,11 @@ public class GameOfLife {
         while (simulation) {
 
             //for every tick the user wants to do
+            World.toDisplay(0);
             for (int i = 0; i < runs; i++) {
                 //apply rules 1-4 to the entire game
                 World.playBall();
-                //print out what's on our board by quadrants 1-4
+                //print out what's on our board
                 World.toDisplay(i + 1);
             }
 
@@ -206,8 +207,8 @@ public class GameOfLife {
      */
     private static Cell makeCell(String in, int index){
         Cell new_cell = new Cell();
-        new_cell.x = Integer.parseInt(in.substring(0,index));
-        new_cell.y = Integer.parseInt(in.substring(index+1, in.length()));
+        new_cell.setX(Integer.parseInt(in.substring(0,index)));
+        new_cell.setY(Integer.parseInt(in.substring(index + 1, in.length())));
         return new_cell;
     }
 }
