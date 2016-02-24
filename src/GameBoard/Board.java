@@ -15,7 +15,6 @@ public class Board {
         setCells(new ArrayList<>());
     }
 
-
     /**
      * Displays the Board's information at a specific tick
      * @param tick the specific tick at which the board is displayed
@@ -92,63 +91,24 @@ public class Board {
         ArrayList<Cell> lazarus = new ArrayList<>();
 
         //go through all the alive cells
-        for (Cell curr : getCells()){
+        for (Cell curr : getCells()) {
+
             //get the live cell's neighbors
             ArrayList<Cell> nbors1 = curr.getNeighbors();
+            for (Cell nbor : nbors1){
 
-            //go through all the alive cells once more
-            for (Cell other : getCells()){
-                //make sure that the cell in this loop is not the same as our first one
-                if (curr.sameCell(other)){
-                    continue;
-                }
-                //get this live cell's neighbors
-                ArrayList<Cell> nbors2 = other.getNeighbors();
+                //if the neighbor is dead
+                if (containsCell(nbor,getCells()) == -1){
 
-                //go through all the alive cells a third time
-                for (Cell last : getCells()){
-                    //make sure that the cell in this loop does not match the first one or second one
-                    if (curr.sameCell(last) || other.sameCell(last)){
-                        continue;
-                    }
+                    //check how many neighbors to this cell are alive
+                    int n = nbor.neighborCount(getCells());
 
-                    //get this live cell's neighbors
-                    ArrayList<Cell> nbors3 = last.getNeighbors();
+                    //if exactly three live neighbors, add it once to list
+                    if (n == 3){
 
-                    //Now we have any individual three live cell's neighbors, and now we need to find the
-                    //dead neighbors that these three cell's share, thus finding the dead cells with three neighbors
-
-                    //for every neighbor in the first cell's neighbors
-                    for (Cell nbor1 : nbors1){
-
-                        //make sure it is dead
-                        if (containsCell(nbor1, getCells()) >= 0){
-                            continue;
-                        }
-
-                        //for every neighbor in the second cell's neighbors
-                        for (Cell nbor2 : nbors2){
-
-                            //make sure it is dead
-                            if (containsCell(nbor2, getCells()) >= 0){
-                                continue;
-                            }
-
-                            //for every neighbor in the third cell's neighbors
-                            for (Cell nbor3 : nbors3){
-
-                                //make sure it is dead
-                                if (containsCell(nbor3, getCells()) >= 0){
-                                    continue;
-                                }
-
-                                //if all of these neighbors is the same dead cell
-                                if (nbor1.sameCell(nbor2) && nbor2.sameCell(nbor3)){
-                                    if (containsCell(nbor1,lazarus) == -1){
-                                        lazarus.add(nbor1);
-                                    }
-                                }
-                            }
+                        //if cell hasn't already been marked for birth
+                        if (containsCell(nbor,lazarus) == -1){
+                            lazarus.add(nbor);
                         }
                     }
                 }

@@ -2,6 +2,7 @@ package Game;
 
 import GameBoard.Board;
 import GameBoard.Cell;
+import Test.UnitTests;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -99,7 +100,10 @@ public class GameOfLife {
         boolean simulation = true;
 
         //while we're still playing
+        int prev = 0;
         while (simulation) {
+
+            //save how many times we've reiterated
 
             //for every tick the user wants to do
             World.toDisplay(0);
@@ -107,8 +111,16 @@ public class GameOfLife {
                 //apply rules 1-4 to the entire game
                 World.playBall();
                 //print out what's on our board
-                World.toDisplay(i + 1);
+                World.toDisplay(prev + i + 1);
             }
+            prev = prev + runs;
+           /* if(!UnitTests.Test2(World.getCells())){
+                System.out.println("R-Pentimento incorrect at tick 10, Fail Test2");
+            }
+            else {
+                System.out.println("R-Pentimento correct at tick 10");
+            }*/
+
 
             //Are we still playing?
             System.out.println("Continue? Y/N");

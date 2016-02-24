@@ -95,6 +95,11 @@ public class Cell {
         return nbor_count;
     }
 
+    /**
+     * Method for comparing if two cells occupy the same space
+     * @param comp
+     * @return
+     */
     public boolean sameCell(Cell comp){
         if (getX() == comp.getX() && getY() == comp.getY()){
             return true;
@@ -102,24 +107,44 @@ public class Cell {
         return false;
     }
 
+    /**
+     * Getter method for x-coordinate
+     * @return
+     */
     public int getX() {
         return x;
     }
 
+    /**
+     * Getter method for y-coordinate
+     * @return
+     */
     public int getY(){
         return y;
     }
 
+    /**
+     * Setter method for x-coordinate
+     * @param x
+     */
     public void setX(int x) {
         this.x = x;
     }
 
+    /**
+     * Setter method for y-coordinate
+     * @param y
+     */
     public void setY(int y) {
         this.y = y;
     }
 
+    /**
+     * toString method for a cell
+     * @return
+     */
     @Override
     public String toString(){
-        return("X-COORDINATE: " + Integer.toString(getX()) + "        Y-COORDINATE: " + Integer.toString(getY()));
+        return("X-COORDINATE: " + Integer.toString(getX()) + "                          Y-COORDINATE: " + Integer.toString(getY()));
     }
 }
