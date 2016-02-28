@@ -27,4 +27,3 @@ INPUTS:
                as taking up 0.5 units left, right, up, and down from their center (x,y) point.  This allows us to
                relate every Cell together.  Although the Game of Life does not need a specific origin, (0,0) makes
                sense for our relational plotting/neighbor checking.
-

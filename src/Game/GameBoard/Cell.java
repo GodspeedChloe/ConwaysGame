@@ -31,25 +31,46 @@ public class Cell {
 
         //List for storing the neighbors of a cell
         ArrayList<Cell> friends = new ArrayList<>();
-        Cell neighbor = new Cell();
 
-        neighbor.setX(getX());
-        neighbor.setY(getY() + 1);
-        friends.add(neighbor);
-        neighbor.setX(getX() + 1);
-        friends.add(neighbor);
-        neighbor.setY(getY());
-        friends.add(neighbor);
-        neighbor.setY(getY() - 1);
-        friends.add(neighbor);
-        neighbor.setX(getX());
-        friends.add(neighbor);
-        neighbor.setX(getX() - 1);
-        friends.add(neighbor);
-        neighbor.setY(getY());
-        friends.add(neighbor);
-        neighbor.setY(getY() + 1);
-        friends.add(neighbor);
+        Cell neighbor1 = new Cell();
+        neighbor1.setX(getX());
+        neighbor1.setY(getY() + 1);
+        friends.add(neighbor1);
+
+        Cell neighbor2 = new Cell();
+        neighbor2.setX(getX() + 1);
+        neighbor2.setY(getY() + 1);
+        friends.add(neighbor2);
+
+        Cell neighbor3 = new Cell();
+        neighbor3.setX(getX() + 1);
+        neighbor3.setY(getY());
+        friends.add(neighbor3);
+
+        Cell neighbor4 = new Cell();
+        neighbor4.setX(getX() + 1);
+        neighbor4.setY(getY() - 1);
+        friends.add(neighbor4);
+
+        Cell neighbor5 = new Cell();
+        neighbor5.setY(getY() - 1);
+        neighbor5.setX(getX());
+        friends.add(neighbor5);
+
+        Cell neighbor6 = new Cell();
+        neighbor6.setX(getX() - 1);
+        neighbor6.setY(getY() - 1);
+        friends.add(neighbor6);
+
+        Cell neighbor7 = new Cell();
+        neighbor7.setX(getX() - 1);
+        neighbor7.setY(getY());
+        friends.add(neighbor7);
+
+        Cell neighbor8 = new Cell();
+        neighbor8.setX(getX() - 1);
+        neighbor8.setY(getY() + 1);
+        friends.add(neighbor8);
         return friends;
     }
 

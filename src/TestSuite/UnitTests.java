@@ -501,7 +501,7 @@ public class UnitTests {
 
         for (int runs = 0; runs < 30; runs++) World.executeTick();
 
-        if (World.getCells().size() < 6) {
+        if (World.getCells().size() < 8) {
             System.out.println("\nTest 11 Failure");
             System.out.println("Too few cells alive; Cells alive: " + Integer.toString(World.getCells().size()));
             System.out.println("Board at tick 30: ");
@@ -509,7 +509,7 @@ public class UnitTests {
             return;
         }
 
-        if (World.getCells().size() > 6){
+        if (World.getCells().size() > 8){
             System.out.println("\nTest 11 Failure");
             System.out.println("Too many cells alive; Cells alive: " + Integer.toString(World.getCells().size()));
             System.out.println("Board at tick 30: ");
