@@ -3,7 +3,6 @@ package TestSuite;
 import Game.GameBoard.Board;
 import Game.GameBoard.Cell;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 
@@ -24,37 +23,48 @@ public class RunTests {
     public static void main(String[] args){
 
         Board testWorld = new Board();
-        System.out.println("Starting tests");
+        System.out.println("Starting tests\n");
+
         //fill for test 1
         testWorld.setCells(rPentomino());
         UnitTests.Test1(testWorld);
+
         //fill for test 2
         testWorld.setCells(rPentomino());
         UnitTests.Test2(testWorld);
+
         //fill for test 3
         testWorld.setCells(rPentomino());
         UnitTests.Test3(testWorld);
+
         //fill for test 4
         testWorld.setCells(insertBlock());
         UnitTests.Test4(testWorld);
+
         //fill for test 5
         testWorld.setCells(insertBlock());
         UnitTests.Test5(testWorld);
+
         //fill for test 6
         testWorld.setCells(insertBoat());
         UnitTests.Test6(testWorld);
+
         //fill for test 7
         testWorld.setCells(insertBoat());
         UnitTests.Test7(testWorld);
+
         //fill for test 8
         testWorld.setCells(insertBlinker());
         UnitTests.Test8(testWorld);
+
         //fill for test 9
         testWorld.setCells(insertBlinker());
         UnitTests.Test9(testWorld);
+
         //fill for test 10
         testWorld.setCells(insertBeacon());
         UnitTests.Test10(testWorld);
+
         //fill for test 11
         testWorld.setCells(insertBeacon());
         UnitTests.Test11(testWorld);

@@ -4,7 +4,8 @@ import java.util.ArrayList;
 
 /**
  * Created by Chloe on 1/28/2016.
- * Cells are the individual automata in the world
+ * This file defines what a Cell is and methods that they can access to provide information on themselves
+ * Cells are the cellular automata that are what is "alive" in the Game of Life
  */
 public class Cell {
 

@@ -5,6 +5,9 @@ import Game.GameBoard.Cell;
 
 /**
  * Created by Chloe on 2/24/2016.
+ * This file exists to house all the testing methods.  They will be called in RunTests.java
+ * Testing for this file uses known outcomes at known iterations with known inputs relying on
+ * the implementation that can be found here: http://www.bitstorm.org/gameoflife/
  */
 public class UnitTests {
 
@@ -15,7 +18,7 @@ public class UnitTests {
      * Check whether or not the game runs the r-pentomino correctly for 5 iterations
      * input to start the program should be the cells {(-1,1),(0,0),(0,1),(0,2),(1,2)}
      * # of ticks should be 5
-     * @param World the board for which we'll test
+     * @param World The board we are testing
      * @return
      */
     public static void Test1(Board World){
@@ -66,7 +69,7 @@ public class UnitTests {
      * Check whether or not the game runs the r-pentomino correctly for 10 iterations
      * input to start the program should be the cells {(-1,1),(0,0),(0,1),(0,2),(1,2)}
      * # of ticks should be 10
-     * @param World the board for which we'll test
+     * @param World The board we are testing
      */
     public static void Test2(Board World){
 
@@ -117,7 +120,7 @@ public class UnitTests {
      * Check whether or not the game runs the r-pentomino correctly for 15 iterations
      * input to start the program should be the cells {(-1,1),(0,0),(0,1),(0,2),(1,2)}
      * # of ticks should be 15
-     * @param World the board for which we'll test
+     * @param World The board we are testing
      */
     public static void Test3(Board World){
 
@@ -178,7 +181,7 @@ public class UnitTests {
      * Check whether or not the game runs the block still life correctly for 5 iterations
      * input to start the program should be the cells {(0,0),(0,1),(1,0),(1,1)}
      * # of ticks should be 5
-     * @param World
+     * @param World The board we are testing
      */
     public static void Test4(Board World){
 
@@ -223,7 +226,7 @@ public class UnitTests {
      * Check whether or not the game runs the block still life correctly for 5 iterations
      * input to start the program should be the cells {(0,0),(0,1),(1,0),(1,1)}
      * # of ticks should be 30
-     * @param World
+     * @param World The board we are testing
      */
     public static void Test5(Board World){
 
@@ -270,7 +273,7 @@ public class UnitTests {
      * Check whether or not the game runs the boat still life correctly for 5 iterations
      * input to start the program should be the cells {(0,0),(0,2),(-1,1),(-1,2),(1,1)}
      * # of ticks should be 5
-     * @param World
+     * @param World The board we are testing
      */
     public static void Test6(Board World){
 
@@ -316,7 +319,7 @@ public class UnitTests {
      * Check whether or not the game runs the boat still life correctly for 5 iterations
      * input to start the program should be the cells {(0,0),(0,2),(-1,1),(-1,2),(1,1)}
      * # of ticks should be 30
-     * @param World
+     * @param World The board we are testing
      */
     public static void Test7(Board World){
 
@@ -363,7 +366,7 @@ public class UnitTests {
      * Check whether or not the game runs the blinker oscillator correctly for 1 iterations
      * input to start the program should be the cells {(0,0),(0,-1),(0,1)}
      * # of ticks should be 1
-     * @param World
+     * @param World The board we are testing
      */
     public static void Test8(Board World){
 
@@ -405,7 +408,7 @@ public class UnitTests {
      * Check whether or not the game runs the blinker oscillator correctly for 1 iterations
      * input to start the program should be the cells {(0,0),(0,-1),(0,1)}
      * # of ticks should be 30
-     * @param World
+     * @param World The board we are testing
      */
     public static void Test9(Board World){
 
@@ -448,7 +451,7 @@ public class UnitTests {
      * Check whether or not the game runs the beacon oscillator correctly for 1 iterations
      * input to start the program should be the cells {(0,0),(0,1),(1,0),(1,1),(2,2),(2,3),(3,2),(3,3)}
      * # of ticks should be 1
-     * @param World
+     * @param World The board we are testing
      */
     public static void Test10(Board World){
 
@@ -495,7 +498,7 @@ public class UnitTests {
      * Check whether or not the game runs the beacon oscillator correctly for 1 iterations
      * input to start the program should be the cells {(0,0),(0,1),(1,0),(1,1),(2,2),(2,3),(3,2),(3,3)}
      * # of ticks should be 30
-     * @param World
+     * @param World The board we are testing
      */
     public static void Test11(Board World){
 
