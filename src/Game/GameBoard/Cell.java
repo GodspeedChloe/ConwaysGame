@@ -147,7 +147,9 @@ public class Cell {
      */
     @Override
     public String toString(){
-        return("X-COORDINATE: " + Integer.toString(getX()) +
-                "                          Y-COORDINATE: " + Integer.toString(getY()));
+
+        System.out.printf("%-30.30s  %-30.30s%n", "X-COORDINATE: " +
+                        Integer.toString(getX()), "Y-COORDINATE: " + Integer.toString(getY()));
+        return "";
     }
 }

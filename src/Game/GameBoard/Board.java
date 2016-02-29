@@ -27,9 +27,7 @@ public class Board {
 
         System.out.println("\nAT TICK NUMBER " + Integer.toString(tick) + ":\n");
         //Print every Cell
-        for(Cell alive : getCells()) {
-            System.out.println(alive.toString());
-        }
+        for(Cell alive : getCells()) alive.toString();
     }
 
 
