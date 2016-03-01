@@ -1,4 +1,4 @@
-package TestSuite;
+package TestSuite.TestCases;
 
 import Game.GameBoard.Board;
 import Game.GameBoard.Cell;

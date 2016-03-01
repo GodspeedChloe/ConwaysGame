@@ -2,6 +2,7 @@ package TestSuite;
 
 import Game.GameBoard.Board;
 import Game.GameBoard.Cell;
+import TestSuite.TestCases.UnitTests;
 
 import java.util.ArrayList;
 
