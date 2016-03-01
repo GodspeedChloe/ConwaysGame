@@ -20,7 +20,7 @@ public class ApplyRules {
      * @throws IOException
      */
     public static void runTicks(Board World, BufferedReader my_reader, int runs) throws IOException {
-        
+
         int previous_count = 0;
         while (runs > 0) {
 
