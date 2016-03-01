@@ -98,16 +98,18 @@ public class GameOfLife {
 
         //same boolean concept as before
         //simulation loops until the user doesn't want to play anymore
-        boolean simulation = true;
+        boolean run_again = true;
 
         //while we're still playing
         int previous_count = 0;
-        while (simulation) {
+        while (run_again) {
 
-            //save how many times we've reiterated
+            //if we haven't started yet print the inputs
+            if (previous_count == 0) {
+                World.displayBoard(0);
+            }
 
             //for every tick the user wants to do
-            World.displayBoard(0);
             for (int tick = 0; tick < runs; tick++) {
 
                 //apply rules 1-4 to the entire game
@@ -116,42 +118,59 @@ public class GameOfLife {
                 World.displayBoard(previous_count + tick + 1);
             }
 
-            //Are we still playing?
-            System.out.println("Continue? Y/N");
-            String input1 = my_reader.readLine();
-            previous_count = previous_count + runs;
+            boolean valid = false;
+            while (!valid){
+                //Are we still playing?
+                System.out.println("\nContinue? Y/N");
+                String input1 = my_reader.readLine();
 
-            //if we're still playing
-            if (input1.equals("Y")){
 
-                //Ask how many more ticks to do
-                System.out.println("Enter a positive integer for how many iterations you want to run");
-                String input2 = my_reader.readLine();
+                //if we're still playing
+                if (input1.equals("Y")) {
 
-                //if our input is valid
-                if (isInteger(input2)){
-                    //and if it is positive
-                    if (Integer.parseInt(input2) > 0){
-                        //reset our ticks to do here
-                        runs = Integer.parseInt(input2);
-                        System.out.println("Continuing the Game");
+                    //increase the previous count
+                    previous_count = previous_count + runs;
+                    //break out of this input loop
+                    valid = true;
+                    //we wanna run the Game again
+                    run_again = true;
+
+                    //Ask how many more ticks to do
+                    System.out.println("Enter a positive integer for how many iterations you want to run");
+                    String input2 = my_reader.readLine();
+
+                    //if our input is valid
+                    if (isInteger(input2)) {
+                        //and if it is positive
+                        if (Integer.parseInt(input2) > 0) {
+                            //reset our ticks to do here
+                            runs = Integer.parseInt(input2);
+                            System.out.println("Continuing the Game");
+                        }
+                    }
+                    //if our input is the ENTER key
+                    else if (input2.equals("")) {
+                        System.out.println("Please try again with a positive integer");
+                    }
+                    //if user input is garbage
+                    else {
+                        System.out.println("Please try again, not a valid positive integer");
                     }
                 }
-                //if user input is garbage
-                else {
-                    System.out.println("Please try again, not a valid positive integer");
+                //if we're not going to continue
+                else if (input1.equals("N")) {
+                    System.out.println("Thanks for playing!!!!");
+                    run_again = false;
+                    //quit the program
+                    System.exit(0);
                 }
-            }
-            //if we're not going to continue
-            else if (input1.equals("N")){
-                System.out.println("Thanks for playing!!!!");
-                simulation = false;
-                //quit the program
-                System.exit(0);
-            }
-            //if user entered garbage
-            else{
-                System.out.println("Invalid input, try again");
+
+                //if user entered garbage
+                else {
+                    valid = false;
+                    run_again = false;
+                    System.out.println("Invalid input, try again");
+                }
             }
         }
     }

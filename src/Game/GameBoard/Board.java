@@ -24,7 +24,6 @@ public class Board {
      * @param tick the specific tick at which the board is displayed
      */
     public void displayBoard(int tick){
-
         System.out.println("\nAT TICK NUMBER " + Integer.toString(tick) + ":\n");
         //Print every Cell
         for(Cell alive : getCells()) alive.toString();
